@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Son Nguyen — Electrical Engineering</title>
+<meta name="description" content="Portfolio of Son Nguyen, electrical engineering student at UBC Okanagan. PCB design, rocket avionics, robotics research.">
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #10161f;
+    --surface-2: #151d29;
+    --border: #232d3d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #3fb950;
+    --accent-dim: rgba(63, 185, 80, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(10, 14, 20, 0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .inner {
+    max-width: 960px; margin: 0 auto; padding: 1rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  nav .logo { font-weight: 700; font-size: 1.05rem; }
+  nav .logo span { color: var(--accent); }
+  nav .links a {
+    color: var(--muted); text-decoration: none; margin-left: 1.5rem; font-size: 0.95rem;
+  }
+  nav .links a:hover { color: var(--accent); }
+
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Hero */
+  .hero { padding: 5rem 0 4rem; }
+  .hero .kicker {
+    color: var(--accent); font-size: 0.9rem; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .hero h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); line-height: 1.15; margin-bottom: 1rem; }
+  .hero p.sub { color: var(--muted); font-size: 1.15rem; max-width: 620px; margin-bottom: 2rem; }
+  .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 0.7rem 1.4rem; border-radius: 8px;
+    text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    border: 1px solid var(--border); color: var(--text);
+    background: var(--surface); transition: border-color 0.15s, transform 0.15s;
+  }
+  .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #06130a; }
+  .btn.primary:hover { filter: brightness(1.08); }
+
+  /* Sections */
+  section { padding: 3.5rem 0; }
+  section h2 {
+    font-size: 1.6rem; margin-bottom: 0.4rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  section h2 .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  section .lede { color: var(--muted); margin-bottom: 2rem; max-width: 640px; }
+
+  /* Project cards */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    overflow: hidden; transition: border-color 0.15s, transform 0.15s;
+    display: flex; flex-direction: column;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .card .thumb {
+    aspect-ratio: 16 / 9; background: var(--surface-2);
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
+  }
+  .card .thumb svg { width: 64px; height: 64px; opacity: 0.85; }
+  .card .thumb .ph-label {
+    position: absolute; bottom: 0.6rem; right: 0.8rem;
+    font-size: 0.72rem; color: var(--muted);
+  }
+  .card .body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+  .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .card p { color: var(--muted); font-size: 0.92rem; margin-bottom: 1rem; flex: 1; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .tag {
+    font-size: 0.75rem; color: var(--accent); background: var(--accent-dim);
+    border: 1px solid rgba(63,185,80,0.35); border-radius: 20px; padding: 0.15rem 0.65rem;
+  }
+
+  /* About */
+  .about-box {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.75rem; color: var(--muted);
+  }
+  .about-box strong { color: var(--text); }
+  .about-box p + p { margin-top: 1rem; }
+
+  /* Contact */
+  .contact-box { text-align: center; padding: 2rem 0 1rem; }
+  .contact-box p { color: var(--muted); margin-bottom: 1.5rem; }
+
+  footer {
+    border-top: 1px solid var(--border); margin-top: 2rem;
+    padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: 0.85rem; text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3.5rem 0 3rem; }
+    nav .links a { margin-left: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <div class="logo mono">son<span>.nguyen</span></div>
+    <div class="links">
+      <a href="#projects">Projects</a>
+      <a href="lab-notes.html">Lab Notes</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="kicker mono">// electrical engineering · ubc okanagan</div>
+    <h1>Son Nguyen</h1>
+    <p class="sub">I design PCBs — from rocket avionics to soft robotics hardware. Third-year electrical engineering student turning ideas into boards that fly, move, and sense.</p>
+    <div class="btn-row">
+      <a class="btn primary" href="#projects">View projects</a>
+      <a class="btn mono" href="https://github.com/chuoidawy" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </header>
+
+  <section id="projects">
+    <h2><span class="dot"></span>Projects</h2>
+    <p class="lede">A selection of my hardware work. Most of my projects live on a PCB — renders and photos coming soon.</p>
+    <div class="grid">
+
+      <article class="card">
+        <div class="thumb" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="#3fb950" stroke-width="2">
+            <rect x="18" y="18" width="28" height="28" rx="3"/>
+            <path d="M18 26h-8M18 34h-8M18 42h-8M54 26h-8M54 34h-8M54 42h-8M26 18v-8M34 18v-8M42 18v-8M26 54v-8M34 54v-8M42 54v-8"/>
+            <circle cx="32" cy="32" r="4" fill="#3fb950" stroke="none"/>
+          </svg>
+          <span class="ph-label mono">pcb photo</span>
+        </div>
+        <div class="body">
+          <h3>UBCO Rocketry — Avionics</h3>
+          <p>Avionics member of the UBCO Rocketry team. Competed at Launch Canada 2026 in Timmins, Ontario — our rocket launched successfully.</p>
+          <div class="tags"><span class="tag">Avionics</span><span class="tag">Embedded</span><span class="tag">Telemetry</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="#3fb950" stroke-width="2">
+            <rect x="14" y="22" width="36" height="20" rx="3"/>
+            <path d="M22 22v-8M32 22v-8M42 22v-8M22 50v-8M32 50v-8M42 50v-8"/>
+            <path d="M22 32h20" stroke-dasharray="3 3"/>
+            <circle cx="32" cy="32" r="3" fill="#3fb950" stroke="none"/>
+          </svg>
+          <span class="ph-label mono">pcb photo</span>
+        </div>
+        <div class="body">
+          <h3>Soft Robotics Research</h3>
+          <p>Recipient of the 2026 International Undergraduate Research Award (IUSRA). Led a soft robotics research project with the Nanomaterial and Polymer Nanocomposite Laboratory (NPNL) at UBCO — my first co-op.</p>
+          <div class="tags"><span class="tag">Research</span><span class="tag">Robotics</span><span class="tag">Hardware</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="#3fb950" stroke-width="2">
+            <path d="M32 8v10M32 46v10M8 32h10M46 32h10"/>
+            <rect x="22" y="22" width="20" height="20" rx="3"/>
+            <path d="M27 32h10M32 27v10"/>
+          </svg>
+          <span class="ph-label mono">pcb photo</span>
+        </div>
+        <div class="body">
+          <h3>Startup — Electrical Lead</h3>
+          <p>Working with the NPNL research group on a start-up idea as Electrical Lead, taking research hardware toward a real product.</p>
+          <div class="tags"><span class="tag">Startup</span><span class="tag">Electrical Lead</span><span class="tag">Hardware</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <h2><span class="dot"></span>About</h2>
+    <p class="lede">A little background.</p>
+    <div class="about-box">
+      <p>I'm <strong>Son Nguyen</strong>, a third-year electrical engineering student at <strong>UBC Okanagan</strong>. Originally from Vietnam, I moved to Canada for high school in Toronto.</p>
+      <p>My work centers on electronics hardware: avionics with the <strong>UBCO Rocketry</strong> team, soft robotics research funded by the <strong>IUSRA 2026</strong> award, and an early-stage start-up where I'm the <strong>Electrical Lead</strong>. Most of what I build ends up as a PCB — designed in Altium, built to fly, move, or sense.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2><span class="dot"></span>Contact</h2>
+    <div class="contact-box">
+      <p>Find my work on GitHub, or reach out by email.</p>
+      <div class="btn-row" style="justify-content:center;">
+        <a class="btn mono" href="https://github.com/chuoidawy" target="_blank" rel="noopener">github.com/chuoidawy ↗</a>
+        <a class="btn mono" href="mailto:Chuoidawyuni@gmail.com">Chuoidawyuni@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap mono">© 2026 Son Nguyen · built for GitHub Pages</div>
+</footer>
+
+</body>
+</html>
